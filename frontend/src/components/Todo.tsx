@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Todo = () => {
 
     const [todoList, setTodoList] = useState<string[]>([]); // We need to tell react that it is a list of string, otherwise we will get errors
     const [textInput, setTextInput] = useState('');
-    
+    const [isInit, setIsInit] = useState(false); // This was needed because otherwise the local storage would update at first initialize as well. I thought before it would run for sure after the first useeffect but i guess not
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault(); /* Prevent refresh because forms on default refreshes the page after but we don't really want that for react*/
         setTodoList(prevTodoList => [...prevTodoList, textInput]);
@@ -16,6 +17,21 @@ const Todo = () => {
         newTodos.splice(index, 1);
         setTodoList(newTodos);
     }
+
+    useEffect(() => {
+        const data = localStorage.getItem('my-todo-list');
+        if (data) {
+            setTodoList(JSON.parse(data));
+        };   
+        setIsInit(true);
+    }, [])
+    
+
+    useEffect(() => {
+        if (isInit) {
+            localStorage.setItem('my-todo-list', JSON.stringify(todoList));
+        }
+    }, [todoList, isInit])
 
     const todoDiv = todoList.map((todo, index) => (
             <div key={index} className='bg-blue-200 p-4 rounded-full border-black border-4 my-2 flex gap-4 h-20 font-bold text-2xl justify-between items-center'>
