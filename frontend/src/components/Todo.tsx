@@ -7,7 +7,7 @@ const Todo = () => {
     const [isInit, setIsInit] = useState(false); // This was needed because otherwise the local storage would update at first initialize as well. I thought before it would run for sure after the first useeffect but i guess not
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault(); /* Prevent refresh because forms on default refreshes the page after but we don't really want that for react*/
+        e.preventDefault(); /* Prevent refresh because forms on default refreshes the page after but we don't really want that for react - no use for it*/
         setTodoList(prevTodoList => [...prevTodoList, textInput]);
         setTextInput('');
     };
@@ -34,19 +34,19 @@ const Todo = () => {
     }, [todoList, isInit])
 
     const todoDiv = todoList.map((todo, index) => (
-            <div key={index} className='bg-blue-200 p-4 rounded-full border-black border-4 my-2 flex gap-4 h-20 font-bold text-2xl justify-between items-center'>
+            <div key={index} className='bg-gray-200 p-4 shadow-2xl rounded-3xl border-black border-4 my-2 flex gap-4 w-2/5 font-bold text-3xl justify-between items-center'>
                 <div className='text-center flex-1'>{todo}</div>
-                <button onClick={() => handleDelete(index)} className='bg-green-200 rounded-full border-black border-2 p-2'>Delete</button>
+                <button onClick={() => handleDelete(index)} className='bg-red-500 italic rounded-2xl border-black border-2 p-3 text-2xl'>Delete</button>
             </div>
         ));
 
     return (
-        <div className='flex flex-col items-center border-red-300 border-4 bg-red-200 p-2'>
+        <div className='flex flex-col items-center h-screen border-4 p-2 bg-gradient-to-r from-gray-600 to-gray-500'>
             <h1>Todo App</h1>
             <h2>What Needs to be done?</h2>
-            <form onSubmit={handleSubmit}>
-                <input className='border-black border-2 h-10 rounded-full p-4' type="text" value={textInput} onChange={(e) => setTextInput(e.target.value)}/>
-                <input className='border-black border-2 bg-gray-100 mx-2 px-2 rounded-2xl p-2' type="submit" value="Add" />
+            <form className='w-1/2 flex mb-3' onSubmit={handleSubmit}>
+                <input className='flex-1 border-black border-2 p-4 rounded-xl focus:outline-none text-2xl' type="text" value={textInput} onChange={(e) => setTextInput(e.target.value)}/>
+                <input className='border-black border-2 bg-gray-100 mx-2 px-2 rounded-xl p-2 w-1/6 font-bold text-2xl' type="submit" value="Add" />
             </form>
             {todoDiv}
         </div>
