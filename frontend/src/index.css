@@ -13,3 +13,8 @@ h2 {
     font-weight: bold;
     color: white;
 }
+
+/* Check if we need this for tailwind */
+body {
+    min-width: 100vw;
+}
