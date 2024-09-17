@@ -42,8 +42,7 @@ const Todo = () => {
 
     return (
         <div className='flex flex-col items-center h-screen border-4 p-2 bg-gradient-to-r from-gray-600 to-gray-500'>
-            <h1>Todo App</h1>
-            <h2>What Needs to be done?</h2>
+            <h1>Todo List</h1>
             <form className='w-1/2 min-w-[400px] flex mb-3' onSubmit={handleSubmit}>
                 <input className='flex-1 border-black w-5/6 border-2 p-4 rounded-xl focus:outline-none text-2xl' type="text" value={textInput} onChange={(e) => setTextInput(e.target.value)}/>
                 <input className='border-black border-2 bg-gray-100 ml-2 rounded-xl p-2 w-1/6 font-bold text-2xl' type="submit" value="Add" />
