@@ -1,4 +1,3 @@
-import Testing from './components/Testing';
 import Todo from './components/Todo';
 
 function App() {
