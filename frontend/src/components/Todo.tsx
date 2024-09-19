@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import TodoBlocks from './TodoBlocks';
 
 const Todo = () => {
     const [todoList, setTodoList] = useState<string[]>([]); // We need to tell react that it is a list of string, otherwise we will get errors
@@ -45,22 +46,14 @@ const Todo = () => {
     }
 
     const todoDiv = todoList.map((todo, index) => (
-        <div
-            key={index}
-            className="my-2 flex w-2/5 min-w-[350px] items-center justify-between gap-4 rounded-2xl border-4 border-neutral-700 bg-neutral-800 p-4 text-3xl font-bold text-neutral-50 shadow-2xl"
-            draggable
-            onDragStart={() => (dragTask.current = index)}
-            onDragEnter={() => (draggedOverTask.current = index)}
-            onDragEnd={handleSort}
-        >
-            <div className="flex-1 text-center">{todo}</div>
-            <button
-                onClick={() => handleDelete(index)}
-                className="rounded-xl border-2 border-neutral-600 bg-neutral-700 p-3 text-2xl hover:bg-red-700"
-            >
-                Delete
-            </button>
-        </div>
+        <TodoBlocks
+            index={index}
+            todo={todo}
+            dragTask={dragTask}
+            draggedOverTask={draggedOverTask}
+            handleSort={handleSort}
+            handleDelete={handleDelete}
+        />
     ));
 
     return (
