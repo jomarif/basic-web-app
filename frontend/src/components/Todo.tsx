@@ -49,7 +49,7 @@ const Todo = () => {
     ));
 
     return (
-        <div className="flex h-screen w-full flex-col items-center border-4 bg-neutral-900 p-2">
+        <div className="flex h-screen w-full flex-col items-center border-4 border-neutral-700 bg-neutral-900 p-2">
             <h1>Todo List</h1>
             <br />
             <form
