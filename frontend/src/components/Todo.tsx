@@ -36,12 +36,12 @@ const Todo = () => {
     const todoDiv = todoList.map((todo, index) => (
         <div
             key={index}
-            className="my-2 flex w-2/5 min-w-[350px] items-center justify-between gap-4 rounded-3xl border-4 border-neutral-700 bg-neutral-800 p-4 text-3xl font-bold text-neutral-50 shadow-2xl"
+            className="my-2 flex w-2/5 min-w-[350px] items-center justify-between gap-4 rounded-2xl border-4 border-neutral-700 bg-neutral-800 p-4 text-3xl font-bold text-neutral-50 shadow-2xl"
         >
             <div className="flex-1 text-center">{todo}</div>
             <button
                 onClick={() => handleDelete(index)}
-                className="rounded-2xl border-2 border-neutral-600 bg-neutral-700 p-3 text-2xl hover:bg-red-700"
+                className="rounded-xl border-2 border-neutral-600 bg-neutral-700 p-3 text-2xl hover:bg-red-700"
             >
                 Delete
             </button>
@@ -49,7 +49,7 @@ const Todo = () => {
     ));
 
     return (
-        <div className="flex h-screen w-full flex-col items-center border-4 border-neutral-700 bg-neutral-900 p-2">
+        <div className="flex min-h-screen w-full flex-col items-center border-4 border-neutral-700 bg-neutral-900 p-2">
             <h1>Todo List</h1>
             <br />
             <form
