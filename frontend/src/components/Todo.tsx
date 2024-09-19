@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 const Todo = () => {
     const [todoList, setTodoList] = useState<string[]>([]); // We need to tell react that it is a list of string, otherwise we will get errors
     const [textInput, setTextInput] = useState('');
     const [isInit, setIsInit] = useState(false); // This was needed because otherwise the local storage would update at first initialize as well. I thought before it would run for sure after the first useeffect but i guess not
+    const dragTask = useRef<number>(0);
+    const draggedOverTask = useRef<number>(0);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault(); /* Prevent refresh because forms on default refreshes the page after but we don't really want that for react - no use for it*/
@@ -33,10 +35,23 @@ const Todo = () => {
         }
     }, [todoList, isInit]);
 
+    function handleSort() {
+        const todoListCopy = [...todoList];
+        const temp = todoListCopy[dragTask.current];
+        todoListCopy[dragTask.current] = todoListCopy[draggedOverTask.current];
+        todoListCopy[draggedOverTask.current] = temp;
+
+        setTodoList(todoListCopy);
+    }
+
     const todoDiv = todoList.map((todo, index) => (
         <div
             key={index}
             className="my-2 flex w-2/5 min-w-[350px] items-center justify-between gap-4 rounded-2xl border-4 border-neutral-700 bg-neutral-800 p-4 text-3xl font-bold text-neutral-50 shadow-2xl"
+            draggable
+            onDragStart={() => (dragTask.current = index)}
+            onDragEnter={() => (draggedOverTask.current = index)}
+            onDragEnd={handleSort}
         >
             <div className="flex-1 text-center">{todo}</div>
             <button
@@ -53,7 +68,7 @@ const Todo = () => {
             <h1>Todo List</h1>
             <br />
             <form
-                className="mb-3 flex w-1/2 min-w-[300px] justify-center"
+                className="mb-3 flex w-1/2 min-w-[300px] justify-center gap-2"
                 onSubmit={handleSubmit}
             >
                 <input
@@ -63,7 +78,7 @@ const Todo = () => {
                     onChange={(e) => setTextInput(e.target.value)}
                 />
                 <input
-                    className="ml-2 rounded-xl border-2 border-neutral-700 bg-neutral-800 p-2 text-2xl font-bold text-white"
+                    className="rounded-xl border-2 border-neutral-700 bg-neutral-800 p-2 text-2xl font-bold text-white hover:bg-green-700"
                     type="submit"
                     value="Add"
                 />
