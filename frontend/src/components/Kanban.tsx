@@ -7,8 +7,8 @@ import {
     DragOverEvent,
     DragOverlay,
     DragStartEvent,
+    DragEndEvent,
     PointerSensor,
-    TraversalOrder,
     useSensor,
     useSensors
 } from '@dnd-kit/core';
