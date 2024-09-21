@@ -1,10 +1,12 @@
+import { RouterProvider, Routes, Route } from 'react-router-dom';
 import Todo from './components/Todo';
+import Router from './Router';
+import Kanban from './components/Kanban';
 
 function App() {
     return (
         <div>
-            <Todo />
-            {/* <Testing /> */}
+            <RouterProvider router={Router} />
         </div>
     );
 }

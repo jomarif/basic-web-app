@@ -22,7 +22,7 @@ const TodoBlocks: React.FC<TodoBlocksProps> = ({
     return (
         <div
             key={index}
-            className="my-2 flex w-2/5 min-w-[350px] items-center justify-between gap-4 rounded-2xl border-4 border-neutral-700 bg-neutral-800 p-4 text-3xl font-bold text-neutral-50 shadow-2xl"
+            className="my-2 flex w-2/5 min-w-[350px] items-center justify-between gap-4 rounded-2xl border-4 border-neutral-700 bg-neutral-800 p-4 text-2xl font-bold text-neutral-50 shadow-2xl"
             draggable
             onDragStart={() => (dragTask.current = index)}
             onDragEnter={() => (draggedOverTask.current = index)}
